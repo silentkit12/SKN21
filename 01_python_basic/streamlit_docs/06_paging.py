@@ -12,6 +12,7 @@ st.markdown(
     - `st.page_link(페이지경로, label="링크 Label")`
 """
 )
+
 st.subheader("링크")
 st.page_link("06_paging.py", label="Home", icon='🏠')
 st.page_link("pages/page1.py", label="Page 1", icon='👍')

@@ -71,6 +71,8 @@ st.write("**선택한 지역**:", option)
 st.subheader("Checkbox")
 @st.cache_data
 def get_data():
+    # csv 파일을 읽어 DataFrame(판다스의 표)로 생성(read_csv)
+    # 앞 10개 행만 조회(head(10))
     df = pd.read_csv("data/boston_housing.csv").head(10)
     return df
 
@@ -103,7 +105,10 @@ if uploaded_file is not None:
     # UploadFile.getvalue(): 업로드된 파일을 bytes로 반환
     # UploadFile.name      : 업로드된 파일이름 반환.
     bytes_data = uploaded_file.getvalue()
+    
+    # 저장할 경로 
     save_filepath = os.path.join(save_dir, uploaded_file.name)
+    # 업로드 된 파일 저장
     with open(save_filepath, "wb") as fw:
         fw.write(bytes_data)
     st.write(uploaded_file.name)
@@ -133,6 +138,6 @@ with open(down_filepath, "rb") as fr:
         "파일 다운로드",                             # Button Label
         data=fr.read(),                             # 다운로드 시킬 파일 content. (str or bytes)
         file_name=os.path.basename(down_filepath),  # 다운 로드 될때 파일명 (경로일 경우)
-    )
+    )# os.path.basename("경로") 경로에서 마지막 경로(basename)을 반환.
 
 

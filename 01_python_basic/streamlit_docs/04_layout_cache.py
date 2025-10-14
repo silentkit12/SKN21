@@ -64,4 +64,3 @@ st.title("보스톤 지역 주거지역 정보")
 btn = st.button("정보 조회")
 if btn:
     st.dataframe(data)
-
