@@ -233,7 +233,34 @@ from emp;
 -- EMP 테이블에서 업무(job)이 'AD_PRES'거나 'FI_ACCOUNT'거나 'PU_CLERK'인 직원들의 ID(emp_id), 이름(emp_name), 업무(job)을 조회.  
 -- 업무(job)가 'AD_PRES'는 '대표', 'FI_ACCOUNT'는 '회계', 'PU_CLERK'의 경우 '구매'가 출력되도록 조회
 
+select emp_id,
+       emp_name,
+       case job when 'AD_PRES' then '대표'
+                when 'FI_ACCOUNT' then '회계'
+                when 'PU_CLERK' then '구매' 
+                else job -- 출력값에 column 이름을 작성 > 원래 그 행의 값을 출력
+		end "job"
+from emp
+where job in ('AD_PRES', 'FI_ACCPUNT', 'PU_CLERK');
 
 -- EMP 테이블에서 부서이름(dept_name)과 급여 인상분을 조회.
 -- 급여 인상분은 부서이름이 'IT' 이면 급여(salary)에 10%를 'Shipping' 이면 급여(salary)의 20%를 'Finance'이면 30%를 나머지는 0을 출력
+
+select dept_name,
+      salary,
+      case dept_name when 'IT' then salary * 0.1
+                     when 'shpping' then salary * 0.2
+                     when 'Finace' then salary * 0.3
+                     else  0
+                     
+	end "급여 인상분"
+    from emp;
+    
+    select salary,
+    case when salary >= 10000 then '1등급'
+    else '2등급' end "급여 등급"
+    from emp;
+    
+    
+-- 20000이상, 20000~10000, 10000미만
 

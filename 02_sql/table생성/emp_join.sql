@@ -1,5 +1,5 @@
--- CREATE DATABASE hr_join;
--- USE  hr_join;
+CREATE DATABASE hr_join;
+USE  hr_join;
 
 -- set foreign_key_checks=0;
 
@@ -223,3 +223,7 @@ INSERT INTO salary_grade (grade,low_sal,high_sal) VALUES (2, 5001, 10000);
 INSERT INTO salary_grade (grade,low_sal,high_sal) VALUES (3, 10001, 15000);
 INSERT INTO salary_grade (grade,low_sal,high_sal) VALUES (4, 15001, 20000);
 INSERT INTO salary_grade (grade,low_sal,high_sal) VALUES (5, 20001, 99999);
+
+select * from dept;
+
+
