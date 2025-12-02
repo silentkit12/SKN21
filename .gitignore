@@ -4,6 +4,8 @@ saved_model/
 saved_dir/
 datasets/
 
+naver_movie_comment_classifier/
+
 .json
 
 .ipynb_checkpoints/
