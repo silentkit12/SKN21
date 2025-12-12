@@ -3,6 +3,8 @@ saved_models/
 saved_model/
 saved_dir/
 datasets/
+data/
+
 
 naver_movie_comment_classifier/
 
