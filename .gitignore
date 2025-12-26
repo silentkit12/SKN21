@@ -4,7 +4,7 @@ saved_model/
 saved_dir/
 datasets/
 data/
-
+vector_storage/
 
 naver_movie_comment_classifier/
 
