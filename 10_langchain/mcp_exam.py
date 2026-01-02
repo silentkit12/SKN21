@@ -4,6 +4,7 @@ from langchain_openai import ChatOpenAI
 from langchain.agents import create_agent
 from dotenv import load_dotenv
 import asyncio
+import os
 
 load_dotenv()
 
@@ -15,12 +16,23 @@ async def main():
                 "transport":"stdio", # 통신방식
                 "command":"python",
                 "args":["-m","mcp_server_time"] # command + args 실행 : python -m mcp_server_time 서버를 실행하고 연결
+            },
+            "filesystem": {
+                "transport":"stdio",
+                "command": "npx",
+                "args": [
+                    "-y",
+                    "@modelcontextprotocol/server-filesystem",
+                    os.getcwd(), # filesystem이 사용할 수 있는 디렉토리 경로들을 지정.
+                    r"c:\temp"
+                     ]
             }
-        }
+        }       
     )
     #MCP Client로 부터 tool 들을 가져오기
     tools = await client.get_tools()
-    
+
+
     #tools : list[structuredTool - Langchain Tool 타입] - ㅡMCP 서버의 툴들을 langchain 에서 사용할 수 있게 만들어서 반환
 
     agent = create_agent(
