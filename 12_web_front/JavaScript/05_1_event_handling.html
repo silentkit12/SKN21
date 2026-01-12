@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <style>
+        #layer {
+            width: 300px;
+            height: 300px;
+            background-color: blue;
+        }
+    </style>
+    <body>
+        <div
+            id="layer"
+            onmouseover='console.log("마우스 IN")'
+            onmouseout='console.log("마우스out")'
+            onclick='alert("클릭")'
+        ></div>
+
+        <input type="text" name="txt" onblur="check(this)">
+        <!--onsubmit ="return fales" 전송을 중지-->
+        <form
+            action="/test"
+            method="post"
+            id="form"
+            onsubmit="return checkForm()"
+        > 
+            이름: <input type="text" name="name" id="name"><br>
+            나이: <input type="text" name="age" id="age"><br>
+            <input type="submit" value="등록 폼 Submit 버튼">
+        </form>
+
+        <script>
+            function check(text_input) {
+                alert(text_input.value); //입력 form의 velue(입력값)을 조회
+                text_input.value = ""; // value를 변경
+            }
+            
+            function checkForm() {
+                // id로 태그 객체 조회
+                let nameTF = document.getElementById("name");
+                let ageTF = document.getElementById("age");
+                // 텍스트 입력 폼에 입력된 text를 조회
+                let name = nameTF.value; //태그 객체.변수 -> 태그의 속성을 조회
+                let age = ageTF.value;
+
+                if (!name) { //문자열이 false:"",null
+                    alert("이름을 입력하세요");
+                    nameTF.focus();
+                    return false; //submit을 중단
+                } else {
+                    if (name.length > 5) { //문자열.length -> 글자수 반환
+                        alert("이름은 5글자까지 가능합니다.");
+                        nameTF.value = "";
+                        nameTF.focus();
+                        return false;
+                    }
+                }
+                if (!age) { 
+                    alert("나이를 입력하세요");
+                    ageTF.focus();
+                    return false;
+                } else {
+                    ageNum = parseInt(age);
+                    // parseInt("삼십") -> NaN(false)
+                    if (!ageNum || ageNum < 0) {
+                        alert("나이는 양수 숫자만 가능합니다.");
+                        ageTF.value = "";
+                        ageTF.focus();
+                        return false;
+                    }
+                }
+            }
+            
+        </script>
+        <script>
+            /*
+            - addEventListener() 메소드를 이용한 Event Listener 구현
+                - addEventListener는 브라우저에서 **이벤트(Event)**를 감지하고, 특정 동작(콜백 함수)을 실행하도록 등록하는 메서드.
+                - HTML과 EventHandler를 분리할 수 있다.
+            targetDOM.addEventListener("event", handler함수)
+            */
+
+        </script>
+    </body>
+</html>

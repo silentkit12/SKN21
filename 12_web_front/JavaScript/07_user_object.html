@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <h2>Javascript Object 예제</h2>
+        <script>
+            const person = {
+                name: "홍길동",
+                age: 20,
+                isMarriage: false,
+                "job name": "회사원",
+                hobby: ["게임", "스포츠"],
+                go: function (place) {
+                    alert(place + "에 간다.");
+                },
+                getInfo: function () {
+                    info = `이름: ${this.name}, 나이: ${this.age}`;
+                    return info;
+                },
+            };
+
+            
+        </script>
+    </body>
+</html>

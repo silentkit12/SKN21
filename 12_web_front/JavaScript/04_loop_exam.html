@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <h2>반복문 예제</h2>
+        <script>
+            // 반복문 : while, for , do while, for in
+
+            function whileExam(num) {
+                //num: 초기식
+                let list = [];  //배열array
+                while (num < 10) { //조건식
+                    list.push(num); // 배열에 값을 추가.
+                    num++; //증감식
+                }
+                alert(list);
+            }
+
+            // whileExam(10);
+        
+
+            function forExam() {
+                let list = [];
+                // for(초기식 -1, 조건식 -2, 증감식 -3){반복구문 -4}
+                // 1 -> 2 -ture -> 4 ->3 ->2 -> ture -> 4 -> 3->2-> False -> 종료
+                for (let num = 1; num < 10; num++) {
+                    list.push(num);
+                }
+                alert(list);
+            }
+
+            // forExam();
+
+            function doWhileExam() {
+                let list = [];
+                let num = null;
+                do {
+                    let num = parseInt(
+                        prompt("짝수를 입력하세요. 홀수입력시 종료합니다.")
+                    );
+                    // if (num % 2 != 0) {
+                    //     break;
+                    // }
+                    list.push(num);
+                } while (true);
+                alert(list);
+            }
+            // doWhileExam();
+
+            function while2() {
+                //dowhile 예제 while 문 을 변경
+                let num = parseInt(
+                     prompt("짝수를 입력하세요. 홀수입력시 종료합니다.")
+                );
+                let list =[];
+                while (num % 2 === 0){
+                    list.push(num);
+                    num=parseInt(
+                        prompt("짝수를 입력하세요. 홀수입력시 종료합니다.")
+                    );
+                }
+            }
+
+            function forInExam() {
+                // 배열생성
+                let list = ["a", "b", "c", "d", "e"];
+
+                // idx : 각 원소의 식별자
+                for (let idx in list) {
+                    console.log(idx, list[idx]);
+                }
+            }
+            // forInExam();
+
+
+            function forInExam2() {
+                // JavaScript 객체
+                let info = {
+                    name: "홍길동",
+                    age: 20,
+                };
+                // 객체의 속성(attribute, porperty) 조회
+                console.log(info.age, info["age"]);
+                for (let key in info) { // key :promperty 변수 (키)가 문자열로 반환됨
+                    console.log(key, info[key], typeof key);
+                }
+            }
+            // forInExam2();
+
+            
+        </script>
+    </body>
+</html>

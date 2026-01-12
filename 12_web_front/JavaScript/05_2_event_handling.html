@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        
+        <form
+            action="/test"
+            method="post"
+            id="form"
+        >
+            이름: <input type="text" name="name" id="name" required><br>
+            주소: <input type="text" name="address" id="address" required><br>
+            <input type="submit" value="등록 폼 Submit 버튼">
+        </form>
+        <script>
+            /*
+            - addEventListener() 메소드를 이용한 Event Listener 구현
+                - addEventListener는 브라우저에서 **이벤트(Event)**를 감지하고, 특정 동작(콜백 함수)을 실행하도록 등록하는 메서드.
+                - HTML과 EventHandler를 분리할 수 있다.
+            targetDOM.addEventListener("event", handler함수)
+            */
+            // id로 태그 객체 조회
+            const form = document.getElementById('form')
+            const nameInput = document.getElementById('name')
+            const addressInput = document.getElementById('address');
+            form.addEventListener("submit", (evt)=>{
+                // 기존 Event를 멈춘다.
+                // submit event의 기준 event -> submit 을 멈춘다
+                evt.preventDefault(); 
+
+                const name = nameInput.value.trim()
+                const address = addressInput.value.trim()
+
+                if (name.length > 5) {
+                    alert("이름은 5글자이상 입력하세요.");
+                    nameInput.value = "";
+                    nameInput.focus();
+                    return;
+                }
+                
+                if (address.length < 3) {
+                    alert("주소는 2글자이상 입력하세요.");
+                    addressInput.value = "";
+                    addressInput.focus();
+                    return;
+                }
+                form.submit(); //전송 처리
+            })
+        </script>
+    </body>
+</html>

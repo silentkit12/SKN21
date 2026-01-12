@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <h2>함수 예제</h2>
+
+        <script>
+
+            //1. 함수 정의
+            function hello1() {
+                alert("경고입니다."); //경고창 
+            }
+
+            // hello1();
+
+            //2. parameter(매개변수) 가 있는 함수
+            function hello2(name, age) {
+                alert("hello2");
+                alert(`이름: ${name}, 나이: ${age}`);
+                if (!name) { //null/undefined - false
+                    alert("이름 입력");
+                }
+            }
+
+            // hello2("홍길동", 30);
+            // hello2();
+            // hello2(null,30);      
+
+
+            //5. 기본값이 있는 파라미터.
+            function hello3(name = "무명", age = 0) {
+                console.log(`이름: ${name}, 나이: ${age}`);
+            }
+            // hello3(); // 파라미터를 비웠을 때 기본으로 주어진 값 대입
+
+
+            //4. 반환값이 있는 함수
+            function hello4() {
+                let name = prompt("이름을 입력하세요"); //사용자 입력
+                return `이름 : ${name}`;
+            }
+            
+            // let name = hello4();
+            // console.log(name);
+            
+
+            //5. Rest Parameter
+            function hello5(name, age, ...other) {
+                console.log(name, age);
+                console.log(other);
+                console.log(other[3]);
+            }
+
+            // hello5("이순신",22,"서울",180, 72.3, "B")
+
+
+            //6. 함수 리터럴.
+            let hello6 = function (name) {
+                alert(name);
+            };
+            
+            // hello6("이순신");
+
+
+            //7. 함수를 argument로 전달.
+            // 값을 처리하는 로직을 caller로 부터 받아서 사용.
+            function worker(func) {
+                let num1 = 10;
+                let num2 = 20;
+                let result = func(num1, num2);
+                console.log("계산결과: " + result);
+            }
+            // const worker2=(func)=>{
+            //     let num1 = 10;
+            //     let num2 = 20;
+            //     let result = func(num1, num2);
+            //     console.log("계산결과: " + result);
+            // }
+
+
+            function sum(n1, n2) {
+                return n1 + n2;
+            }
+
+            worker(sum); // sum(): 호출, sum: 함수 객체(값)
+
+            worker(function(n1, n2){
+                return n1 - n2});
+
+            worker((n1, n2)=> n1*n2) //화살표 함수
+
+        
+
+            //8. 화살표 함수 lambda num1, num2 : num1 + num2
+            let arrowFunc1 = (num1, num2) => num1 + num2;
+
+            let arrowFunc2 = (num1, num2) => {
+                let result = num1 - num2;
+                console.log(result);
+            };
+            
+
+        </script>
+    </body>
+</html>
