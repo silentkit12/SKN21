@@ -1,0 +1,111 @@
+<!-- 
+- fetch()는 네트워크 요청(Network Request)을 보내고 응답(Response)을 받기 위한 Javascript 함수​
+    - 기존의 XMLHttpRequest보다 더 간결하고 Promise 기반으로 설계되어 비동기 코드 흐름과 잘 맞는다.​
+    
+- 호출​
+
+    - fetch(url, options): Promise<Response>​
+        - url (문자열) - 요청을 보낼 주소​
+        - options (객체) - 요청과 관련된 다양한 설정들. 요청방식, header, body 등​
+
+    - 반환값: Promise<Response>​
+        - 요청을 보내면 Promise가 바로 반환된다. 서버에서 응답이 오면 Promise가 Response객체로 이행된다.​
+        - Promise: 자바스크립트의 비동기 처리 제어를 위한 표준으로 비동기 작업의 미래 완료 결과(성공 또는 실패)를 나타내는 객체이다.
+
+- Response​
+    - fetch()의 최종 반환 값으로 서버 응답 정보를 담아 제공한다.​
+
+    - 주요 Property​
+        - ok (bool) - 정상 응답인지 오류응답지. (200번 범위면 true 반환)​
+        - status (number): HTTP 상태 코드​
+        - headers (headers object): 응답 Header 객체​
+        - body: (ReadableStream): 응답 본문(body) Stream​
+
+    - Body 내용 읽기 메소드​
+        - 응답 본문(body)을 다양한 형식으로 변환해서 읽는 함수를 제공. Stream을 이용해 읽기 때문에 한번 읽으면 다시 읽을 수 없다.​
+        - Response.json(): Promise<object>: JSON 파싱해서 JS Object로 반환​
+        - Response.text(): Promise<string>: 일반 text​
+        - Response.blob(): Promise<Blob>: 이미지/파일​
+        - Response.formData(): Promise<FormData>: multipart form​
+
+ -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="getData()">GET 요청</button>
+    <button onclick="postData()">POST 요청</button>
+    <div id = "result"></div>
+    <script>
+
+        async function postData(){
+            let url = "https://httpbin.org/post";
+            const payload = {
+                title : "자바스크립트 fetch 함수",
+                category : "JavaScript",
+                author :"홍길동"
+            }
+            const reqHeader = {
+                "content-Type":"application/json" // 서버에 전송하는 값의 형식지정. JSON
+
+            }
+            const response = await fetch (
+                url,
+                {
+                    method: "post", //http 요청방식
+                    header: reqHeader, //요청 Header
+                    body: JSON.stringify(payload) // 서버에 전송하는 값: 객체에서 문자열로 변환해서 전달
+                }
+                if (!response.ok){
+                    alert("서버 요청 실패");
+                    return; 
+                }
+            ) 
+            const result_layer = document.getElementById("result");
+
+            let info = await response.json(); //JSON -> JS 객체
+            // info -> 필요한 값들을 추출
+            let url_info = info['url'];
+            let origin_info = info['origin'];
+
+            let result = `<h2> 응답결과 </h2><b>url</b>:${url_info}<br><b>origin</b>:${origin_info}`
+            result += `<p><pre>${JSON.stringify(info, null, 2)}</pre></p>`
+        }
+
+        // 비동기 처리를 위한 함수. (내부적으로 promise를 사용. await 사용)
+        async function getData(){
+            url = "https://httpbin.org/get"; //요청할 서버 URL
+            const response = await fetch(url); //response:response
+            if (!response.ok) { // 비정상처리 응답 http 상태코드 200이 아닌것
+                alert("서버 요청 실패");
+                return;
+            }
+            //정상응답
+            //응답 데이터 (response body) 조회 화면에 출력
+            const result_layer = document.getElementById("result");
+
+            let info = await response.json(); //JSON -> JS 객체
+            // info -> 필요한 값들을 추출
+            let url_info = info['url'];
+            let origin_info = info['origin'];
+
+            let result = `<h2> 응답결과 </h2><b>url</b>:${url_info}<br><b>origin</b>:${origin_info}`
+            result += `<p><pre>${JSON.stringify(info, null, 2)}</pre></p>`
+            result_layer.innerHTML = result;
+            // JSON.stringify(info, null, 2) : JS 객체를 JSON 문자열로 변환
+            //  null : 문자열에 포함할 key를 선택, (null: 모든 key를 다 변환, ['origin', 'url']: 지정한 key 만 변환)
+            // 2: 보기 좋게 들여쓰기 해서 변환할 때 들여쓰기 칸 수 (생략- 한줄)
+        }
+
+    </script>
+</body>
+<div id="result"></div>
+</html>
+<!--httpbin.org-->

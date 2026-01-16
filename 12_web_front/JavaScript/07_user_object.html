@@ -17,11 +17,20 @@
                 go: function (place) {
                     alert(place + "에 간다.");
                 },
-                getInfo: function () {
+                getInfo: function () { 
+                    // this -> self
                     info = `이름: ${this.name}, 나이: ${this.age}`;
                     return info;
                 },
             };
+            console.log(person.name, person['name']);
+            console.log(person.hobby[0], person["hobby"][1]);
+            console.log(person["job name"])
+            info = person.getInfo();
+            console.log(info)
+            // 값을 변경
+            person.age =30;
+            console.log(person.getInfo());
 
             
         </script>

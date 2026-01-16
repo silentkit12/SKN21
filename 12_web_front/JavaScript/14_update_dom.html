@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Insert title here</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    </head>
+    </head>
+    <body class="container mt-3">
+		<div>
+            <input type="button" onclick="appendChildTest()" value="P 요소 추가" />
+            <input type="button" onclick="insertBeforeTest()" value="P 요소 삽입" />
+            <input type="button" onclick="innerHTMLtest()" value="innerHTMLtest" />
+        </div>
+        <div>
+            <input type="text" id="idx" value="삭제할 노드 Index을 적으세요" onfocus="this.value='' " />
+            <input type="button" onclick="deleteNodeByIdx();" value="n번째 노드 삭제" />
+            <input type="button" onclick="deleteAllNode	()" value="모든 노드 삭제" />
+        </div>
+		<hr>
+        <div id="layer">
+            <p style="background-color: blue">1번 라인</p>
+            <p style="background-color: red">2번 라인</p>
+            <p style="background-color: yellow">3번 라인</p>
+            <p style="background-color: green">4번 라인</p>
+        </div>
+        
+
+        <script>          
+            
+            function appendChildTest() {
+                const layer = document.getElementById("layer");
+                //하위 노드의 개수
+                const cnt = layer.children.length
+                console.log("레이어 하위 노드 개수", cnt);
+
+                //layer 에 <p>를 추가
+                const newP = document.createElement("p");
+                newP.setAttribute("style", "background-color:skyblue;color:white");
+
+                const txt = document.createTextNode(`${cnt+1}번 라인 - NewLine`);
+                newP.appendChild(txt);
+                layer.appendChild(newP);
+            }
+            function insertBeforeTest() {
+                const layer = document.getElementById("layer");
+                const newP = document.createElement('p');
+                newP.setAttribute("style", "background-color:black;color:white");
+
+                const txt = document.createTextNode("New Line 삽입");
+                newP.appendChild(txt);
+
+                layer.insertBefore(newP, layer.children[1]);
+				
+            }
+            function deleteAllNode() {
+                //레이어의 모든 하위 노드를 삭제
+                const layer = document.getElementById("layer");
+                while (layer.hasChildNodes()){
+                    layer.removeChild(layer.firstChild);
+                }
+				
+            }
+            function deleteNodeByIdx() {
+                //#idx에서 index를 읽어서 #layer 자식 노드 중 index번째 것인 것을 삭제
+                const idx = document.getElementById("idx");
+                if (isNaN(idx.value )){ //isNaN(value) -> values NAN인지 여부를 확인
+                    //
+                    alert("삭제할 idex는 정수를 입력하세요.")
+                    idx.focus();
+                    idx.value = "";
+                    return;
+                }
+                const layer = document.getElementById("layer");
+                if (idx.value >= layer.children.length){
+                    alert("index의 범위를 넘었습니다.");
+                    return ;
+                }
+                //삭제 - 부모노드.removeChild(삭제할 자식노드)
+                layer.removeChild(layer.children[idx.value]);
+				
+            }
+            function innerHTMLtest() {
+                const layer = document.getElementById("layer");
+                //자식/자손 노드들 중 텍스트 노드들만 조회해서 string으로 반환
+                console.log("layer.innerText:", layer.innerText);
+                
+                console.log("layer.innerHTML", layer.innerHTML);
+                layer.innerHTML="<b>안녕하세요</b><br><i>반갑습니다.</i>"
+
+                // 자식 노드를 대입한 문자열(textNode)로 대체
+				// layer.innerText = "<b>안녕하세요.</b>";
+
+            }
+        </script>
+    </body>
+</html>
