@@ -11,10 +11,11 @@ app_name = "polls" # 전체 설정에 대한 prefix(namespace).
                    # 설정 name()에 공통적으로 붙일 이름 ("app_name:name")
 urlpatterns =[
     path("welcome", views.welcome, name="welcome"),
-    path("list", views.list, name="list"),
+    path("vote_list", views.list, name="list"),
     path("vote_form/<int:question_id>", views.vote_form, name="vote_form"),
     path("vote", views.vote, name="vote"),
     path("vote_result/<int:question_id>", views.vote_result, name="vote_result"),
+    path("vote_create", views.vote_create, name="vote_create"),
 ]
 
 

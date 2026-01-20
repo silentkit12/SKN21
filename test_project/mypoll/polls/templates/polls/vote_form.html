@@ -1,14 +1,9 @@
-<!--templates/polls/vote_form.html-->
+{%extends "layout/main_layout.html"%}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>질문 폼</title>
-</head>
-<body>
-<a href="/polls/list">설문 목록</a>
+
+{%block title%}설문하기{%endblock title%}
+
+{%block contents%}
 <h1>설문 하기</h1>
 <h2>{{question.question_text}}</h2>
 
@@ -18,15 +13,14 @@
 </div>
 {%endif%}
 
-<form action="/polls/vote" method="post">
+<form action="{% url 'polls:vote' %}" method="post">
     {% csrf_token %}
     <input type="hidden" name="question_id" value="{{question.pk}}">
     {% for choice in question.choice_set.all %}
-        <input type="radio" name="choice" value="{{choice.pk}}" id="{{choice.pk}}">
+        <input type="radio" name="choice" class="form-check-input" value="{{choice.pk}}" id="{{choice.pk}}">
          <label for="{{choice.pk}}">{{choice.choice_text}}</label><br>
     {%endfor%}
-    <button type="submit">투표</button>
-    <button type="reset">선택해제</button>
+    <button type="submit" class="btn btn-primary">투표</button>
+    <button type="reset" class="btn btn-primary" >선택해제</button>
 </form>
-</body>
-</html>
+{%endblock contents%}

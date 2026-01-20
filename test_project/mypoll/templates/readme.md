@@ -1,0 +1,3 @@
+- mypoll/templates
+- 여러 app들이 공통적으로 사용하는 template들을 저장할 디렉토리
+- config/settings.py 의 TEMPLATES 설정에 등록

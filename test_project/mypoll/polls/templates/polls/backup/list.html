@@ -1,0 +1,29 @@
+<!--template/polls/list.html-->
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">>
+        <title>질문 목록</title>
+    </head>
+    <body>
+        {# <a href="/polls/vote_create">질문 등록</a> #}
+        <a href="{% url 'polls:vote_create' %}">질문 등록 </a>
+        <hr>
+        
+        <h1>설문목록</h1>
+        <ul>
+            <!--반복문 - question_list(context_value:QuertySet)의 Question들을 출력-->
+            {% for question in question_list %}
+            <li>
+                <a href="{% url 'polls:vote_form' question.pk %}">
+                    {{question.pk}}. {{question.question_text}}
+                </a>   
+            </li>
+            {% empty %}
+                {# 처음 부터 question_list가 비어있으면#}
+                <b>아직 등록된 질문이 없습니다.</b>
+            {% endfor %}
+        </ul>
+    </body>
+</html>

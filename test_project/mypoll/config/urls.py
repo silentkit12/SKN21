@@ -29,4 +29,5 @@ urlpatterns = [
     #polls/ 시작하는 url경로로 요청이 들어오면 polls앱/urls.py 의 설정에 가서 나머지를 확인
     path("polls/", include("polls.urls")), 
     # path('polls/welcome', welcome, name="poll_welcome"), #1. client 요청경로 , 2. 호출할 view, 3. name="설정이름"
+    path("account/", include("account.urls"))
 ]

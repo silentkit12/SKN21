@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'polls', #polls app 등록
+    'account',
 ]
 
 MIDDLEWARE = [
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR/"templates",],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -111,6 +112,10 @@ USE_I18N = True
 
 USE_TZ = True
 
+#######################################
+# 사용자 관리시 사용하는 Usermodel 변경
+#######################################
+AUTH_USER_MODEL = "account.CustomUser"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/

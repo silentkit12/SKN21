@@ -1,13 +1,7 @@
-<!--polls/template/polls/vote_result.html-->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>설문 결과</title>
-</head>
-<body>
-    <a href="/polls/list">목록</a>
+{%extends "layout/main_layout.html"%}    
+{%block title%}설문결과{%endblock title%}
+
+{%block constnets%}
     <h1>설문 결과</h1>
     <h2>{{question.pk}}. {{question.question_text}}</h2>
     <ol>
@@ -15,5 +9,4 @@
             <li>{{choice.choice_text}} - {{choice.votes}}</li>
         {% endfor %}
     </ol>
-</body>
-</html>
+{%endblock constnets%}

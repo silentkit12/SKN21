@@ -1,0 +1,69 @@
+{%extends "layout/main_layout.html" %}
+
+{%block title%}설문 등록{%endblock title%}
+
+{%block contents%}
+<h1>설문 문제 등록</h1>
+    {% if error_msg %}
+        <dif style="color: red">{{error_msg}}</dif>
+    {%endif%}
+    <form method="post"> 
+        {% csrf_token %}
+        <h3>질문</h3>
+        <input type="text" name="question_text" class="form_control" value="{{question_text}}" required>
+        <h3>보기</h3>
+        <div id="choice_layer">
+            {%if not choice_list%}
+
+            <div><input type="text" name="choice_text" class="form_control" required></div>
+            <div><input type="text" name="choice_text" class="form_control" required></div>
+            {% else %}
+                {% for choice in choice_list%}
+                <div>
+                    <input type="text" name="choice_text" class="form_control" value="{{choice}}" required>
+                </div>
+                {%endfor%}
+            {% endif %}
+        </div>
+        <div id="btn_layer">
+            <button type="button" onclick="addChoice()"class="btn btn-info">보기추가</button>
+            <button type="button" onclick="delChoice()"class="btn btn-info">보기삭제</button>
+            <button type="submit" class="btn btn-primary">문제 등록</button>
+        </div>
+    </form>
+{%endblock contents%}
+{%block javascript%}
+    <script>
+        function addChoice(){
+            // <input type="text" name="choice_text" size="100"><br>
+            const input = document.createElement("input");
+            input.setAttribute("type", "text");
+            input.setAttribute("name", "choice_text");
+            input.setAttribute('size', "from-control");
+            input.setAttribute("required", ture);
+            // const br = document.createElement("br");
+
+            //input + br 을 묶을 div 생성
+            const div = document.createElement("div");
+            div.appendChild(input);
+            // div.appendChild(br);
+
+            //추가할 초이스 레이어 를 조회
+            const layer = document.querySelector("#choice_layer");
+            layer.appendChild(div);
+        }
+        function delChoice(){
+            // #choice_layer에서 보기 입력폼을 하나 삭제
+            // 보기 입력이 두개이면 삭제하지 않는다 (최소 2개는 유지)
+            // 삭제: 부모노드.removeChild("삭제할 노드")
+            const layer = document.querySelector("#choice_layer");
+            if (layer.children.length > 2){
+                //삭제
+              layer.removeChild(layer.lastChild);
+            }else{
+                //유지
+                alert("보기가 두개이면 삭제가 안됩니다.");
+            }
+        }
+    </script>
+{%endblock javascript%}
