@@ -27,7 +27,17 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     #polls/ 시작하는 url경로로 요청이 들어오면 polls앱/urls.py 의 설정에 가서 나머지를 확인
-    path("polls/", include("polls.urls")), 
-    # path('polls/welcome', welcome, name="poll_welcome"), #1. client 요청경로 , 2. 호출할 view, 3. name="설정이름"
+    path("polls/", include("polls.urls")),
     path("account/", include("account.urls"))
+    # path('polls/welcome', welcome, name="poll_welcome"), #1. client 요청경로 , 2. 호출할 view, 3. name="설정이름"
+   
 ]
+
+from django.conf.urls.static import static
+from . import settings
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+#MEDIA_URL 경로로 요청이 들어오면 어느 디렉토리를 찾아야 하는지 설정
+## 개발 서버에서 설정 필요.
+## 운영 환경(웹서버+MSGI)에서는 업로드 파일도 static 파일로 간주해서 웹 서버가 처리하도록 설정

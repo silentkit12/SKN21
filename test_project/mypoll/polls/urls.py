@@ -16,6 +16,7 @@ urlpatterns =[
     path("vote", views.vote, name="vote"),
     path("vote_result/<int:question_id>", views.vote_result, name="vote_result"),
     path("vote_create", views.vote_create, name="vote_create"),
+    path("vote_delete/<int:question_id>", views.vote_delete, name="vote_delete")
 ]
 
 

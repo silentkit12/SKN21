@@ -20,6 +20,16 @@ class CustomUser(AbstractUser):
         blank=True, #Form 관련 설정. 빈 문자열(값)을 받을 수 있다.
     )
 
+    #프로필 사진 -
+    profile_img = models.ImageField(
+        verbose_name="프로필 사진",
+        null=True, #DB: NULL 허용컬럼
+        blank=True, #Form: required=False
+        upload_to="images/profile/%Y/%m/%d"
+        # MEDIA_ROOT 아래 어디에 저장할 지 경로
+        # media\images\ 업로드 시점 연도\월\일
+    )
+
     def __str__(self):
         return f"username: {self.username}, name:{self.name}"
     

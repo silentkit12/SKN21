@@ -1,0 +1,38 @@
+{% extends "layout/main_layout.html" %}
+
+{% block title %} 회원정보조회 {% endblock title %}
+
+{% block contents %}
+<h1> 회원정보조회 </h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <td>{{user.username}}</td>
+    </tr>
+    <tr>
+        <th>이름</th>
+        <td>{{user.name}}</td>
+    </tr>
+    <tr>
+        <th>이메일주소</th>
+        <td>{{user.email}}</td>
+    </tr>
+    <tr>
+        <th>생일</th>
+        <td>{{user.birthday}}</td>
+    </tr>
+</table>
+{% if user.profile_img %}
+    <a href="{{user.profile_img.url}}">{{user.profile_img}}</a><br>
+    <img src="{{user.profile_img.url}}">
+{% else %}
+    프로필 사진이 없습니다.
+{% endif %}
+
+<div class="mt-3">
+    <a href="{% url 'account:update' %}" class="btn btn-primary">정보수정</a>
+    <a href="{% url 'account:password_change' %}" class="btn btn-primary">비밀번호 수정</a>
+    <a href="{% url 'account:delete' %}" class="btn btn-danger" onclick="return confirm('정말 탈퇴하겠습니까?')">탈퇴</a>
+</div>
+
+{% endblock contents %}

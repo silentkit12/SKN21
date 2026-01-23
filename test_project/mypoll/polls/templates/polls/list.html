@@ -12,7 +12,12 @@
             <li class="list-group-item list-group-item-action">
                 <a href="{% url 'polls:vote_form' question.pk %}">
                     {{question.pk}}. {{question.question_text}}
+                </a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'polls:vote_delete' question.pk %}" class="btn btn-danger btn-sm">
+                    질문삭제
                 </a>   
+                {% endif %}
             </li>
         {% empty %}
         {# 처음 부터 question_list가 비어있으면#}

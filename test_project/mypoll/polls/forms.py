@@ -45,8 +45,8 @@ class ChoiceForm(forms.Form):
     )
     def clean_question_text(self):
         txt = self.cleaned_data['question_text'].strip() # 기본 검증을 통과한 입력값
-        if len(txt) <= 5:
-            raise forms.ValidationError("보기는 6글자 이상 입력하세요")
+        if len(txt) <= 2:
+            raise forms.ValidationError("보기는 2글자 이상 입력하세요")
 
         return txt
 

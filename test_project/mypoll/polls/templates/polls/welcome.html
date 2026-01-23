@@ -1,18 +1,17 @@
 <!--polls/templates/polls/welcome.html-->
 <!--HTML이 아니라 django templete 따라서 html의 언어만 사용하지 않음-->
 
-<!doctype html>
-<html>
-    <head>
-        <title>설문 main</title>
-    </head> 
-    <body>
+{% block title %} Home {% endblock title %}
+{% block contents %}
+
         <h1>Welcom-templete</h1>
+        <img src="/static/polls/imgs/survay.png">
+
         <p>저희 설문 페이지를 방문해주셔서 감사합니다.</p>
         현재시간: {{now}} <!--context value now를 출력-->
         <p>
             <a href="{%url 'polls:list'%}">질문 목록</a>
             <a href="{%url 'polls:vote_create'%}">질문 등록</a>
         </p>
-    </body>
-</html>
+
+{% endblock contents %}
